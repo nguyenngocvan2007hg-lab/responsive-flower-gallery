@@ -1,0 +1,63 @@
+/* Mobile first: one column, no media query needed. */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background-color: #faf7f0;
+  color: #203d30;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+header, main, footer { width: min(92%, 68rem); margin-inline: auto; }
+header { padding-block: 3rem 1rem; border-bottom: 2px solid #42634e; }
+h1 { margin: 0; font-family: Georgia, serif; font-size: clamp(2.5rem, 7vw, 4.7rem); line-height: 1.15; }
+.subtitle { margin-block: 1rem; font-size: 1.15rem; }
+h2 { font-family: Georgia, serif; font-size: 1.8rem; }
+main { padding-block: 1rem 2rem; }
+main > p { font-size: 1.05rem; }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-block: 2rem; }
+figure {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  border: 3px solid #42634e;
+  border-radius: 12px;
+  background-color: #e7efdf;
+  color: #203d30;
+}
+figure img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+figcaption { padding: 1rem; text-align: center; font-size: 1.1rem; font-weight: bold; overflow-wrap: anywhere; }
+a { color: #203d30; text-underline-offset: .25em; }
+a:focus-visible { outline: 3px solid #923d31; outline-offset: 4px; }
+footer { padding-block: 1rem 2rem; border-top: 2px solid #42634e; }
+footer a { display: inline-block; padding-block: .75rem; font-weight: bold; }
+footer small { display: block; }
+.skip-link { position: absolute; top: -6rem; left: 1rem; padding: .8rem; background: #fff; color: #203d30; z-index: 1; }
+.skip-link:focus { top: 1rem; }
+/* Tablet: two columns, circular figures, last figure across both columns. */
+@media screen and (min-width: 772px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  figure { border-radius: 50%; aspect-ratio: 1; display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+  figure img { height: 100%; aspect-ratio: auto; min-height: 0; }
+  figcaption { padding: .75rem 20% 1.75rem; }
+  figure:last-child { grid-column: 1 / -1; }
+}
+/* Large screens: retain two columns; every third figure spans both. */
+@media screen and (min-width: 992px) {
+  figure { border-radius: 0; aspect-ratio: auto; }
+  figure:nth-child(3n) { grid-column: 1 / -1; }
+  figure img { height: 24rem; }
+  figcaption { padding: 1rem; }
+}
+/* Respect the user's motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+/* Dark colours with high-contrast, light text and black figure borders. */
+@media (prefers-color-scheme: dark) {
+  body { background-color: #171d19; color: #f4efcf; }
+  figure { background-color: #26392d; color: #fff1b5; border-color: #000; }
+  a { color: #fff1b5; }
+  a:focus-visible { outline-color: #fff1b5; }
+  header, footer { border-color: #c3d8b9; }
+}
